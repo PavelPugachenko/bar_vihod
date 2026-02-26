@@ -1,0 +1,382 @@
+{% extends "base.html" %}
+
+{% block title %}Выход | Бар{% endblock title %}
+
+{% block content %}
+  <div class="bg-glow bg-glow-left" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-right" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home">бар <span>выход</span></a>
+    <nav>
+      <a href="#menu">Меню</a>
+      <a href="#guests">Гости</a>
+      <a href="#team">Команда</a>
+      <a href="#booking">Бронь</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero reveal">
+      <p class="eyebrow">Центр вечерней жизни</p>
+      <h1>Бар "Выход" - культурный бар.</h1>
+      <p class="hero-text">
+        С нами каждый вечер особенный.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#menu">Меню</a>
+        <a class="btn btn-ghost" href="#booking">Забронировать стол</a>
+      </div>
+    </section>
+
+    <section id="menu" class="section reveal">
+      <div class="section-head">
+        <p class="eyebrow">Меню</p>
+        <h2>Меню бара "Выход"</h2>
+      </div>
+
+      <div class="menu-board">
+        <article class="menu-column">
+          <h3 class="menu-title">Сэндвичи</h3>
+          <ul class="menu-list">
+            {% for item in sandwiches %}
+              <li>
+                <div class="menu-item-line">
+                  <span>{{ item.name }}</span>
+                  {% if item.badge %}
+                    <em>{{ item.badge }}</em>
+                  {% endif %}
+                </div>
+                <div class="menu-item-meta">
+                  <strong>{{ item.price }}</strong>
+                  <small>{{ item.weight }}</small>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <div class="menu-card">
+            <h4 class="menu-title menu-title-small">Салаты</h4>
+            <ul class="menu-list">
+              {% for item in salads %}
+                <li>
+                  <div class="menu-item-line">
+                    <span>{{ item.name }}</span>
+                    {% if item.badge %}
+                      <em>{{ item.badge }}</em>
+                    {% endif %}
+                  </div>
+                  <div class="menu-item-meta">
+                    <strong>{{ item.price }}</strong>
+                    <small>{{ item.weight }}</small>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+
+        <article class="menu-column">
+          <h3 class="menu-title">Закуски</h3>
+
+          <div class="menu-highlight-row">
+            {% for item in snack_highlight %}
+              <div class="menu-highlight-box">
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p>
+                <div class="menu-item-meta">
+                  <strong>{{ item.price }}</strong>
+                  <small>{{ item.weight }}</small>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <ul class="menu-list">
+            {% for item in snacks %}
+              <li>
+                <div class="menu-item-line">
+                  <span>{{ item.name }}</span>
+                  {% if item.badge %}
+                    <em>{{ item.badge }}</em>
+                  {% endif %}
+                </div>
+                {% if item.description %}
+                  <p class="menu-description">{{ item.description }}</p>
+                {% endif %}
+                {% if item.subitems %}
+                  <ul class="menu-sublist">
+                    {% for subitem in item.subitems %}
+                      <li>{{ subitem }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                <div class="menu-item-meta">
+                  <strong>{{ item.price }}</strong>
+                  <small>{{ item.weight }}</small>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <div class="menu-highlight-row">
+            {% for item in special_snacks %}
+              <div class="menu-highlight-box">
+                <h4>
+                  {{ item.name }}
+                  {% if item.badge %}
+                    <em>{{ item.badge }}</em>
+                  {% endif %}
+                </h4>
+                <p>{{ item.description }}</p>
+                <div class="menu-item-meta">
+                  <strong>{{ item.price }}</strong>
+                  <small>{{ item.weight }}</small>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="menu-group-block">
+            <h4>Бутерброды</h4>
+            <ul class="menu-list menu-list-tight">
+              {% for item in sandwich_snacks %}
+                <li>
+                  <div class="menu-item-line">
+                    <span>{{ item.name }}</span>
+                  </div>
+                  <div class="menu-item-meta menu-item-meta-extended">
+                    <strong>{{ item.price }}</strong>
+                    <small>{{ item.piece }}</small>
+                    <small>{{ item.weight }}</small>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="menu-split">
+            <div class="menu-box">
+              <h4>Соусы</h4>
+              <p>100 ₽ / 50гр</p>
+              <ul class="menu-sublist">
+                {% for item in sauces %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="menu-box">
+              <h4>Снеки</h4>
+              <ul class="menu-list menu-list-tight">
+                {% for item in snack_basket %}
+                  <li>
+                    <span>{{ item.name }}</span>
+                    <strong>{{ item.price }}</strong>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="menu-group-block">
+            <h4>Напитки</h4>
+            <p class="menu-caption">Чай (на выбор), 750мл</p>
+            <ul class="menu-list menu-list-tight">
+              {% for item in tea_options %}
+                <li>
+                  <span>{{ item.name }}</span>
+                  <strong>{{ item.price }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+            <ul class="menu-list menu-list-tight">
+              {% for item in soft_drinks %}
+                <li>
+                  <span>{{ item.name }} ({{ item.size }})</span>
+                  <strong>{{ item.price }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+
+        <article class="menu-column menu-column-light">
+          <h3 class="menu-title">Пиво</h3>
+          <ul class="menu-list">
+            {% for beer in beers %}
+              <li>
+                <div class="menu-item-line">
+                  <span>{{ beer.name }}</span>
+                </div>
+                {% if beer.style %}
+                  <p class="menu-description">{{ beer.style }}</p>
+                {% endif %}
+                <div class="menu-item-meta">
+                  <strong>{{ beer.price }}</strong>
+                  <small>{{ beer.size }}</small>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <h3 class="menu-title menu-title-small">Настойки</h3>
+          <div class="menu-tags">
+            <span>Ягодные</span>
+            <span>Сливочные</span>
+            <span>Овощные</span>
+            <span>1 шт - 180</span>
+          </div>
+
+          <div class="tincture-grid">
+            <ul class="menu-sublist">
+              {% for item in tincture_berry %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+            <ul class="menu-sublist">
+              {% for item in tincture_classic %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <h4 class="menu-subheading">Сливочные</h4>
+          <ul class="menu-sublist">
+            {% for item in tincture_cream %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+
+          <h4 class="menu-subheading">Овощные</h4>
+          <ul class="menu-sublist">
+            {% for item in tincture_vegetable %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+
+          <div class="menu-sets">
+            <h4>Сеты настоек</h4>
+            {% for set in shot_sets %}
+              <p>
+                <span>{{ set.count }}</span>
+                <strong>{{ set.price }}</strong>
+              </p>
+            {% endfor %}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="guests" class="section reveal">
+      <div class="section-head">
+        <p class="eyebrow">Люди.Еда.Шоты</p>
+        <h2>Фото</h2>
+      </div>
+      <div class="gallery">
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 1">
+          <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80" alt="Гости бара общаются за стойкой" loading="lazy">
+        </button>
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 2">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" alt="Компания гостей на вечеринке" loading="lazy">
+        </button>
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 3">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=80" alt="Танцы и музыка в баре" loading="lazy">
+        </button>
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 4">
+          <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?auto=format&fit=crop&w=900&q=80" alt="Гости у стойки с коктейлями" loading="lazy">
+        </button>
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1504704911898-68304a7d2807?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 5">
+          <img src="https://images.unsplash.com/photo-1504704911898-68304a7d2807?auto=format&fit=crop&w=900&q=80" alt="Живой вечер в баре" loading="lazy">
+        </button>
+        <button class="gallery-item reveal" data-full="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80" aria-label="Открыть фото гостей 6">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80" alt="Концертная атмосфера и гости" loading="lazy">
+        </button>
+      </div>
+    </section>
+
+    <section id="team" class="section reveal">
+      <div class="section-head">
+        <p class="eyebrow">Команда</p>
+        <h2>Кто делает ваш вечер</h2>
+      </div>
+      <div class="team-grid">
+        <article class="team-card reveal">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Бар-менеджер Александр" loading="lazy">
+          <h3>Александр</h3>
+          <p class="role">Бар-менеджер</p>
+          <p>Собирает карту напитков и отвечает за идеальный баланс вкуса в каждом бокале.</p>
+        </article>
+        <article class="team-card reveal">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=700&q=80" alt="Шеф-бармен Анна" loading="lazy">
+          <h3>Анна</h3>
+          <p class="role">Шеф-бармен</p>
+          <p>Создает фирменные коктейли и держит вечерний ритм стойки.</p>
+        </article>
+        <article class="team-card reveal">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Арт-директор Максим" loading="lazy">
+          <h3>Максим</h3>
+          <p class="role">Арт-директор</p>
+          <p>Отвечает за музыку, свет и то самое настроение, ради которого возвращаются.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="booking" class="section reveal">
+      <div class="section-head">
+        <p class="eyebrow">Бронирование</p>
+        <h2>Забронировать стол</h2>
+      </div>
+
+      {% if feedback %}
+        <div class="flash-stack">
+          <p class="flash flash-{{ feedback.type }}">{{ feedback.text }}</p>
+        </div>
+      {% endif %}
+
+      <div class="booking-wrap">
+        <div class="booking-info">
+          <h3>Как это работает</h3>
+          <ul>
+            <li>Работаем с одной площадкой и 15 столами.</li>
+            <li>Принимаем заявки на бронь с 14:00 до 02:00.</li>
+            <li>После заявки менеджер подтверждает бронь вручную.</li>
+          </ul>
+          <p class="booking-note">
+            Telegram уже подготовлен в коде: как только добавим токен бота и chat id,
+            заявки будут автоматически уходить менеджеру.
+          </p>
+        </div>
+
+        <form method="post" class="booking-form" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+            <div class="field-error">{{ form.non_field_errors }}</div>
+          {% endif %}
+          {% for field in form %}
+            <label class="field">
+              <span>{{ field.label }}</span>
+              {{ field }}
+              {% if field.errors %}
+                <small class="field-error">{{ field.errors|striptags }}</small>
+              {% endif %}
+            </label>
+          {% endfor %}
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts" class="footer reveal">
+    <h2>Бар "Выход"</h2>
+    <p>ул. Ночная, 8 • +7 (900) 000-00-00 • hello@vikhod.bar</p>
+    <small>© <span id="year"></span> Выход. Все права защищены.</small>
+  </footer>
+
+  <div class="modal" id="photoModal" aria-hidden="true">
+    <button class="modal-close" id="modalClose" aria-label="Закрыть фото">×</button>
+    <img id="modalImage" src="" alt="Фото гостей в полном размере">
+  </div>
+{% endblock content %}
