@@ -7,6 +7,8 @@ cd /Users/pavel/bar_vihod
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env
+# В .env можно оставить DJANGO_DEBUG=True для локального режима
 python3 manage.py runserver
 ```
 
@@ -19,7 +21,7 @@ python3 manage.py runserver
 
 ## Telegram для уведомлений о брони
 
-Если переменные не указаны, бронь просто сохраняется в БД и не отправляется в Telegram.
+Если переменные не указаны, форма покажет ошибку настройки Telegram и заявка не отправится.
 
 ```bash
 export TELEGRAM_BOT_TOKEN="123456:ABCDEF..."
@@ -35,3 +37,7 @@ export TELEGRAM_CHAT_ID="-1001234567890"
 - форма брони (имя, телефон, дата, время);
 - валидация окна бронирования: с `14:00` до `02:00`;
 - отправка заявки напрямую в Telegram без сохранения в БД.
+
+## Деплой
+
+Готовая пошаговая шпаргалка для сервера: `DEPLOY_REMINDER.txt`.
